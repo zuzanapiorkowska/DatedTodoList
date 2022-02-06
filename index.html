@@ -11,11 +11,28 @@
 <body>
     <header>
         <h1>my todos</h1>
-        <img src="">
+        <img src="" id="logo">
         <p>choose date:</p>
-        <input type="date">
-        <div id="info"></div>
+        <input type="date" id="date-input">
+        <button id="add-button">Add</button>
+        <div id="info-text"></div>
+        <div id="info-icon">
+            <small>Left click: <span class="instruction">todo completed.</span><br>
+                Right click: <span class="instruction">todo uncompleted.</span><br>
+                Double click: <span class="instruction">delete todo.</span></small>
+        </div>
     </header>
+
+    <main>
+        <!-- <form id="form">
+            <input type="text" class="input" id="input" placeholder="My next todo is..." autocomplete="off">
+            <ul class="todos" id="todos">
+            </ul> -->
+    </main>
+
+    <footer>
+        <p>Created by Zuza Napiórkowska</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
