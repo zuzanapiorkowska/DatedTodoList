@@ -29,6 +29,7 @@ h1 {
 }
 
 main {
+    display: flex;
     background-color: darkcyan;
 }
 
@@ -37,4 +38,47 @@ background-color: darkgray;
 font-size: 0.5rem;
 color: white;
 
+}
+
+#todo-list-container {
+    padding: 2rem;
+}
+
+.add-list-button {
+    height: 2rem;
+    width: 5rem;
+    background-color: violet;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    display: block;
+}
+
+#info {
+    display: flex;
+
+}
+
+#info-icon {
+    font-size: 4rem;
+    color: rgb(255, 255, 255);
+}
+
+.hidden {
+    display: none;
+}
+
+.list-button {
+    background-color:violet;
+}
+
+.todo {
+    background-color: rgb(241, 241, 140);
+}
+
+.add-todo-button {
+    color:yellowgreen;
+    border-radius: 50%;
 }

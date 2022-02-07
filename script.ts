@@ -1,6 +1,8 @@
 import { capitalizeFirstLetter } from "./CapitalizeFirstLetter";
 import { $, $All, $click } from "./EventListenersShortcuts";
 import { showTodaysDate } from "./ShowTodaysDate";
+import { showTodoInput } from "./creating_list_containers/showTodoInput";
+import { showTodoList } from "./creating_list_containers/showTodoList";
 
 const $dateInput = $("#date-input") as HTMLInputElement; // TODO: typy generyczne
 const $addListButton = $("#add-list-button") as HTMLButtonElement;
@@ -20,16 +22,16 @@ class TodoList {
     ) { }
 }
 
-class Todo {
+export class Todo {
     constructor(
         public text: string,
         public completed: boolean
     ) { }
 }
 
-//dodać inputa po kliknięciu dnia
 //dodać todosy też po kliknięciu dnia
-//zrobić "createNewTodo" w danej liście
+//zrobić "addTodo" w danej liście
+//zrobić zapisywanie Todosów w danej TodoLiście
 //zrobić remove todosów
 //zrobić done todosów
 //zapisywanie w localStorage
@@ -70,33 +72,24 @@ function displayCurrentLists(lists: TodoList[]) {
         $click(ListButton, () => {
             currentList.todos.forEach((todo: Todo) => {
                 $todoListContainer.innerHTML="";
-                showTodoInput();
-                showTodoList(todo)
+                showTodoInput($todoListContainer);
+                showAddButton(currentList);
+                showTodoList(todo, $todoListContainer)
             });
         })
     });
 }
 
-function showTodoList(todo: Todo) {
-    const currentTodo = document.createElement("div");
-    currentTodo.classList.add("todo");
-    currentTodo.textContent = todo.text;
-    $todoListContainer.appendChild(currentTodo);
+function showAddButton(list: TodoList) {
+    const addButton = document.createElement("button");
+    addButton.classList.add("add-todo-button");
+    addButton.textContent="+";
+    $todoListContainer.appendChild(addButton);
+    const todoInput = $(".todo-input") as HTMLInputElement
+    // $click(addButton, () => addTodo(todoInput, list));
 }
 
-function showTodoInput() {
-    const todoInput = document.createElement("input");
-    todoInput.type="text";
-    todoInput.placeholder="My next todo is..."
-    todoInput.classList.add("todo-input");
-    $todoListContainer.innerHTML = "";
-    $todoListContainer.appendChild(todoInput);
-}
-
-// function showAddButton() {
-//     const addButton = document.createElement("button");
-//     addButton.classList.add("add-todo-button");
-//     addButton.textContent="+";
-//     $todoListContainer.appendChild(todoInput);
-
-// function addTodo(input)
+// function addTodo(input: HTMLInputElement, list: TodoList) {
+// const todoText=input.value;
+// list.todos.push(new Todo(todoText, false));
+// }
