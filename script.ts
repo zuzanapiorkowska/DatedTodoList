@@ -24,7 +24,7 @@ class Todo {
     constructor(
         public text: string,
         public completed: boolean
-    ) {}
+    ) { }
 }
 
 //dodać inputa po kliknięciu dnia
@@ -65,21 +65,38 @@ function displayCurrentLists(lists: TodoList[]) {
         const currentList = list;
         ListButton.classList.add("list-button");
         ListButton.textContent = list.label;
-        // currentList.todos.push(new Todo("ok", true));
+        currentList.todos.push(new Todo("ok", true));
         $listMenu.appendChild(ListButton);
         $click(ListButton, () => {
             currentList.todos.forEach((todo: Todo) => {
-                const currentTodo = document.createElement("div");
-                currentTodo.classList.add("todo");
-                currentTodo.textContent=todo.text;
                 $todoListContainer.innerHTML="";
-                $todoListContainer.appendChild(currentTodo);
+                showTodoInput();
+                showTodoList(todo)
             });
         })
-        
     });
 }
 
-// function showTodoList(todos) {
+function showTodoList(todo: Todo) {
+    const currentTodo = document.createElement("div");
+    currentTodo.classList.add("todo");
+    currentTodo.textContent = todo.text;
+    $todoListContainer.appendChild(currentTodo);
+}
 
-// }
+function showTodoInput() {
+    const todoInput = document.createElement("input");
+    todoInput.type="text";
+    todoInput.placeholder="My next todo is..."
+    todoInput.classList.add("todo-input");
+    $todoListContainer.innerHTML = "";
+    $todoListContainer.appendChild(todoInput);
+}
+
+// function showAddButton() {
+//     const addButton = document.createElement("button");
+//     addButton.classList.add("add-todo-button");
+//     addButton.textContent="+";
+//     $todoListContainer.appendChild(todoInput);
+
+// function addTodo(input)
