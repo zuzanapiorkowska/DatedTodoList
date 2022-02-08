@@ -430,4 +430,4 @@ function showAlert() {
   }, 200);
 }
 },{"./EventListenersShortcuts":"ZES1","./creatingListLabels/ShowTodaysDate":"iPdJ","./creatingListLabels/CreateListLabel":"mTOz"}]},{},["g4tf"], null)
-//# sourceMappingURL=/script.4fa86fae.js.map
+//# sourceMappingURL=script.4fa86fae.js.map

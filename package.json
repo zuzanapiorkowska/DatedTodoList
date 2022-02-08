@@ -10,7 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "serve": "parcel ./src/index.html"
+    "serve": "parcel ./src/index.html",
+    "build": "parcel build -d docs ./src/index.html --no-minify --public-url ."
   },
   "repository": {
     "type": "git",
