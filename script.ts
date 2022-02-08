@@ -41,7 +41,7 @@ export class Todo {
 //przenoszenie na inny dzień?
 
 $click($infoBox, () => {
-    $infoText.classList.toggle("hidden"); // TODO: extension method
+    $infoBox.classList.toggle("hidden"); // TODO: extension method
 })
 
 $click($addListButton, () => {
