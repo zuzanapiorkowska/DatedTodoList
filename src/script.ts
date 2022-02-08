@@ -129,7 +129,7 @@ function showRemoveListButton(destination: HTMLDivElement, listToRemove: HTMLDiv
     })
     if (!allLists.length) {
         $listMenu.innerHTML = "";
-    })
+    }
 }
 
 function addTodoToList(input: HTMLInputElement, list: TodoList) {
