@@ -6,7 +6,7 @@ import { createListLabel } from "./creatingListLabels/CreateListLabel";
 const $dateInput = $("#date-input") as HTMLInputElement; // TODO: typy generyczne
 const $addListButton = $("#add-list-button") as HTMLButtonElement;
 const $listMenu = $("#current-lists-container") as HTMLDivElement;
-const $infoIcon = $("#info-icon") as HTMLElement;
+const $infoBox = $("#info") as HTMLElement;
 const $infoText = $("#info-text") as HTMLElement;
 const $createTodoContainer = $("#create-todo-container") as HTMLDivElement;
 const $todoListContainer = $("#todos-ul") as HTMLUListElement;
@@ -40,7 +40,7 @@ export class Todo {
 //zrobić "kopiuj tekst"
 //przenoszenie na inny dzień?
 
-$click($infoIcon, () => {
+$click($infoBox, () => {
     $infoText.classList.toggle("hidden"); // TODO: extension method
 })
 
@@ -51,21 +51,31 @@ $click($addListButton, () => {
     updateLocalStorage();
 })
 
-function createNewList() {
+function createNewList() 
+{
     const newListLabel = createListLabel($dateInput.value);
     const newList = new TodoList(newListLabel);
-    allLists.push(newList);
+    const found = allLists.find(element =>
+        element.label===newListLabel)
+    if(found!==undefined){
+        showAlert();
+    } else {
+        allLists.push(newList);
+    }
     console.log("pusz do currentLists", allLists);
 }
 
 function displayCurrentListsTitles(lists: TodoList[]) {
-    lists.forEach((list)=> {
-        const listButton: HTMLDivElement = document.createElement("div");
-        listButton.classList.add("list-button");
-        listButton.textContent = list.label;
-        $listMenu.appendChild(listButton);
-        showRemoveListButton(listButton, listButton, list);
-        $click(listButton, () => {
+    lists.forEach((list) => {
+        const listLabelDiv: HTMLDivElement = document.createElement("div");
+        listLabelDiv.classList.add("list-label-box");
+        const listLabel: HTMLButtonElement = document.createElement("button");
+        listLabelDiv.appendChild(listLabel)
+        listLabel.textContent = list.label;
+        listLabel.classList.add("list-label");
+        $listMenu.appendChild(listLabelDiv);
+        showRemoveListButton(listLabelDiv, listLabelDiv, list);
+        $click(listLabel, () => {
             $todoListContainer.innerHTML = "";
             $createTodoContainer.innerHTML = "";
             showTodoInput($createTodoContainer);
@@ -98,23 +108,27 @@ function showAddButton(list: TodoList) {
 
 function showTodoInput(destination: HTMLDivElement): void {
     const todoInput = document.createElement("input");
-    todoInput.type="text";
-    todoInput.placeholder="My next todo is..."
+    todoInput.type = "text";
+    todoInput.placeholder = "My next todo is..."
     todoInput.classList.add("todo-input");
     destination.appendChild(todoInput);
 }
 
-function showRemoveListButton(destination: HTMLDivElement, listToRemove: HTMLDivElement, list: TodoList){
-    const removeButton = document.createElement("button");
-    removeButton.textContent="x"
+function showRemoveListButton(destination: HTMLDivElement, listToRemove: HTMLDivElement, list: TodoList) {
+    const removeButton = document.createElement("button") as HTMLButtonElement;
+    removeButton.textContent = "x"
+    removeButton.classList.add("remove-list-button")
     destination.appendChild(removeButton);
-    $dblclick(removeButton, ()=>{
+    $click(removeButton, () => {
         $listMenu.removeChild(listToRemove);
-        allLists = allLists.filter((todoList)=>{
-            return todoList.label!==list.label;
+        allLists = allLists.filter((todoList) => {
+            return todoList.label !== list.label;
         });
         console.log("usunięte", allLists);
         updateLocalStorage();
+    })
+    if (!allLists.length) {
+        $listMenu.innerHTML = "";
     })
 }
 
@@ -130,11 +144,16 @@ function showTodo(todo: Todo, destination: HTMLUListElement, list: TodoList) {
     const newTodo = document.createElement("li");
     newTodo.classList.add("todo");
     newTodo.textContent = todo.text;
+    if (todo.completed === true) {
+        newTodo.classList.add("crossed");
+        }
     destination.appendChild(newTodo);
     $dblclick(newTodo, () => removeTodo(newTodo, list))
     newTodo.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         crossTodo(newTodo)
+        todo.completed = !todo.completed;
+        updateLocalStorage();
     });
 }
 
@@ -147,9 +166,16 @@ function removeTodo(todo: HTMLLIElement, list: TodoList): void {
 }
 
 function crossTodo(todo: HTMLLIElement): void {
-    todo.classList.add("crossed");
+    todo.classList.toggle("crossed");
 }
 
-function updateLocalStorage():void{
-localStorage.setItem("todoLists", JSON.stringify(allLists));
+function updateLocalStorage(): void {
+    localStorage.setItem("todoLists", JSON.stringify(allLists));
+}
+
+function showAlert(): void {
+    $addListButton.classList.toggle("red-border");
+    setTimeout(()=>{
+        $addListButton.classList.toggle("red-border");
+    }, 200);
 }

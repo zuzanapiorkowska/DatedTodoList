@@ -5,32 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport">
     <title>Todo List</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <header>
-        <h1>my todos</h1>
+        <h1>my Todos</h1>
         <img src="" id="logo">
-        <p>choose date:</p>
-        <input type="date" id="date-input">
-        <button id="add-list-button">Add</button>
+        <div id="date-box">
+            <p class="choose-text">choose</br>date:</p>
+            <input type="date" id="date-input">
+            <button id="add-list-button">+</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="current-lists-container"></div>
+        <div id="todo-list-container">
+            <div id="create-todo-container"></div>
+            <ul id="todos-ul"></ul>
+        </div>
         <div id="info">
             <i id="info-icon" class="fas fa-info-circle"></i>
             <small id="info-text" class="hidden">Left click: <span class="instruction">todo completed.</span><br>
                 Right click: <span class="instruction">todo uncompleted.</span><br>
                 Double click: <span class="instruction">delete todo.</span></small>
         </div>
-    </header>
-
-    <main>
-        <div id="current-lists-container"></div>
-        <div id="todo-list-container"></div>
-        <!-- <form id="form">
-            <input type="text" class="input" id="input" placeholder="My next todo is..." autocomplete="off">
-            <ul class="todos" id="todos">
-            </ul> -->
     </main>
 
     <footer>
