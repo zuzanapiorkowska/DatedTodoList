@@ -1,5 +1,25 @@
 {
-  "devDependencies": {
+  "name": "todolistwithdates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/script.ts",
+  "dependencies": {
+    "cssnano": "^5.0.17",
+    "postcss": "^8.4.6",
     "typescript": "^4.5.5"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serve": "parcel ./src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuzanapiorkowska/ExpandedToDoList.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zuzanapiorkowska/ExpandedToDoList/issues"
+  },
+  "homepage": "https://github.com/zuzanapiorkowska/ExpandedToDoList#readme"
 }
