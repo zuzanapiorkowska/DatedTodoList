@@ -39,13 +39,12 @@ h1 {
   padding: 0;
   padding-left: 1rem;
   font-family: Corinthia;
-  font-size: 10rem;
+  font-size: 8rem;
   text-shadow: 2px 2px 1px rgb(231, 231, 231);
   color: rgb(0, 0, 0);
   opacity: 90%;
   align-self: flex-start;
   white-space: nowrap;
-  transform: translateY(-1rem);
 }
 
 #date-box {

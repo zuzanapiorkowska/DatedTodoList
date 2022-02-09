@@ -124,7 +124,7 @@ function showRemoveListButton(destination: HTMLDivElement, listToRemove: HTMLDiv
         allLists = allLists.filter((todoList) => {
             return todoList.label !== list.label;
         });
-        console.log("usunięte", allLists);
+        $todoListContainer.innerHTML = "";
         updateLocalStorage();
     })
     if (!allLists.length) {
