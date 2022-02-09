@@ -125,6 +125,7 @@ function showRemoveListButton(destination: HTMLDivElement, listToRemove: HTMLDiv
             return todoList.label !== list.label;
         });
         $todoListContainer.innerHTML = "";
+        $createTodoContainer.innerHTML = "";
         updateLocalStorage();
     })
     if (!allLists.length) {
