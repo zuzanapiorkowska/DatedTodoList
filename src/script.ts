@@ -149,10 +149,13 @@ function showTodo(todo: Todo, destination: HTMLUListElement, list: TodoList) {
         }
     destination.appendChild(newTodo);
     $dblclick(newTodo, () => removeTodo(newTodo, list))
+    $click(newTodo, ()=> {
+        crossTodo(newTodo, todo)
+        updateLocalStorage();
+    })
     newTodo.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-        crossTodo(newTodo)
-        todo.completed = !todo.completed;
+        uncrossTodo(newTodo, todo)
         updateLocalStorage();
     });
 }
@@ -165,8 +168,14 @@ function removeTodo(todo: HTMLLIElement, list: TodoList): void {
     $todoListContainer.removeChild(todo);
 }
 
-function crossTodo(todo: HTMLLIElement): void {
-    todo.classList.toggle("crossed");
+function crossTodo(todoEl: HTMLLIElement, todo: Todo): void {
+    todoEl.classList.add("crossed");
+    todo.completed = true;
+}
+
+function uncrossTodo(todoEl: HTMLLIElement, todo: Todo): void {
+    todoEl.classList.remove("crossed");
+    todo.completed = false;
 }
 
 function updateLocalStorage(): void {
