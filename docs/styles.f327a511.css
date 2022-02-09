@@ -179,6 +179,7 @@ footer {
     width: 100%;
     opacity: 80%;
     cursor: pointer;
+    font-weight: bold;
   }
 
   .todo:hover {
